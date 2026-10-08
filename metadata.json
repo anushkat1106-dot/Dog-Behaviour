@@ -2,5 +2,7 @@
   "name": "CanineMind - Dog Behaviour & Training Guide",
   "description": "An educational guide helping dog owners decode canine body language, emotions, common behavioural challenges, and positive reward-based training.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
