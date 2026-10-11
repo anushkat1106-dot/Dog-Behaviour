@@ -1,14 +1,10 @@
 import React from 'react';
-import { Compass, BookOpen, ShieldCheck, Heart, Sparkles } from 'lucide-react';
+import { Compass, BookOpen, Heart } from 'lucide-react';
 import heroImg from '../assets/images/hero_dog_owner_bond_1791426677848.jpg';
 import { DogImage } from './DogImage';
+import { Link } from '../context/RouterContext';
 
-interface HeroProps {
-  onExploreBehaviour: () => void;
-  onExploreTraining: () => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onExploreBehaviour, onExploreTraining }) => {
+export const Hero: React.FC = () => {
   return (
     <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,23 +29,23 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBehaviour, onExploreTrainin
               Replace guesswork with evidence-based canine psychology and reward-based communication.
             </p>
 
-            {/* Action Buttons */}
+            {/* Action Buttons with unique URLs */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                onClick={onExploreBehaviour}
+              <Link
+                href="/behaviour"
                 className="px-6 py-3.5 text-sm font-semibold text-white bg-[#234231] hover:bg-[#1A3326] rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer flex items-center gap-2"
               >
                 <Compass className="w-4 h-4 text-[#E07A5F]" />
                 <span>Explore Dog Behaviour</span>
-              </button>
+              </Link>
 
-              <button
-                onClick={onExploreTraining}
+              <Link
+                href="/training"
                 className="px-6 py-3.5 text-sm font-semibold text-[#234231] bg-white hover:bg-[#F4EFE6] border border-[#DDD3C0] rounded-xl transition-all shadow-2xs hover:shadow-sm cursor-pointer flex items-center gap-2"
               >
                 <BookOpen className="w-4 h-4 text-[#8C5E3C]" />
                 <span>Learn Training Tips</span>
-              </button>
+              </Link>
             </div>
 
             {/* Adjacent Trust Points */}
@@ -72,7 +68,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBehaviour, onExploreTrainin
           {/* Hero Visual */}
           <div className="lg:col-span-5">
             <div className="relative group">
-              {/* Decorative warm aura glow */}
               <div className="absolute -inset-2 bg-gradient-to-tr from-[#E07A5F]/20 via-[#8C5E3C]/10 to-[#234231]/10 rounded-3xl filter blur-xl opacity-70 group-hover:opacity-100 transition duration-700" />
               
               <div className="relative bg-white p-2.5 rounded-2xl border border-[#E3DAC8] shadow-sm overflow-hidden">

@@ -1,10 +1,11 @@
 import React from 'react';
 import { commonProblems, ProblemItem } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { AlertCircle, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface CommonProblemsProps {
-  onSelectProblem: (problem: ProblemItem) => void;
+  onSelectProblem?: (problem: ProblemItem) => void;
 }
 
 export const CommonProblems: React.FC<CommonProblemsProps> = ({ onSelectProblem }) => {
@@ -27,12 +28,13 @@ export const CommonProblems: React.FC<CommonProblemsProps> = ({ onSelectProblem 
         </p>
       </div>
 
-      {/* Cards Grid */}
+      {/* Cards Grid with unique URLs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {commonProblems.map((prob) => (
-          <div
+          <Link
             key={prob.id}
-            onClick={() => onSelectProblem(prob)}
+            href={`/problems/${prob.id}`}
+            onClick={() => onSelectProblem && onSelectProblem(prob)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
             <div className="relative aspect-[4/3] overflow-hidden">
@@ -60,11 +62,11 @@ export const CommonProblems: React.FC<CommonProblemsProps> = ({ onSelectProblem 
               </div>
 
               <div className="mt-4 pt-3 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>View Action Plan</span>
+                <span>View Full Protocol</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

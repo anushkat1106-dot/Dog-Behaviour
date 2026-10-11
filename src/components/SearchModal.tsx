@@ -1,31 +1,22 @@
 import React, { useState, useMemo } from 'react';
-import { Search, X, ArrowRight, BookOpen, Compass, AlertCircle, Award } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 import {
   coreBehaviours,
   commonProblems,
   trainingMethods,
   breedBehaviors,
-  guideArticles,
-  DogBehaviourItem,
-  ProblemItem,
-  TrainingMethod,
-  BreedInfo,
-  ArticleItem
+  guideArticles
 } from '../data/dogData';
-import { ModalPayload } from './DetailModal';
+import { useRouter } from '../context/RouterContext';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectPayload: (payload: ModalPayload) => void;
 }
 
-export const SearchModal: React.FC<SearchModalProps> = ({
-  isOpen,
-  onClose,
-  onSelectPayload
-}) => {
+export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
+  const { navigate } = useRouter();
 
   const searchResults = useMemo(() => {
     if (!query.trim()) return [];
@@ -36,7 +27,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       title: string;
       category: string;
       snippet: string;
-      payload: ModalPayload;
+      url: string;
     }[] = [];
 
     // Search core behaviours
@@ -47,7 +38,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           title: b.title,
           category: 'Core Behaviour',
           snippet: b.shortDesc,
-          payload: { type: 'behaviour', data: b }
+          url: `/behaviour/${b.id}`
         });
       }
     });
@@ -60,7 +51,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           title: p.title,
           category: 'Behaviour Problem',
           snippet: p.shortDesc,
-          payload: { type: 'problem', data: p }
+          url: `/problems/${p.id}`
         });
       }
     });
@@ -73,7 +64,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           title: t.name,
           category: 'Training Technique',
           snippet: t.tagline,
-          payload: { type: 'training', data: t }
+          url: `/training/${t.id}`
         });
       }
     });
@@ -86,7 +77,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           title: br.name,
           category: 'Dog Breed',
           snippet: `${br.group} · ${br.naturalDrives}`,
-          payload: { type: 'breed', data: br }
+          url: `/breeds/${br.id}`
         });
       }
     });
@@ -99,7 +90,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           title: a.title,
           category: 'Learning Guide',
           snippet: a.excerpt,
-          payload: { type: 'article', data: a }
+          url: `/guides/${a.id}`
         });
       }
     });
@@ -108,6 +99,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   }, [query]);
 
   if (!isOpen) return null;
+
+  const handleSelect = (url: string) => {
+    navigate(url);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-start justify-center pt-16 sm:pt-24 p-4 animate-fade-in">
@@ -146,13 +142,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             <div className="py-8 text-center text-xs text-[#7A6A5E]">
               <p className="font-semibold text-[#4E4137]">Popular searches:</p>
               <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
-                {['Barking', 'Separation Anxiety', 'Clicker Training', 'Golden Retriever', 'Play Bow', 'Leash Pulling'].map((tag) => (
+                {[
+                  { label: 'Why Dogs Bark', url: '/behaviour/why-dogs-bark' },
+                  { label: 'Separation Anxiety', url: '/problems/separation-anxiety' },
+                  { label: 'Clicker Training', url: '/training/clicker-training' },
+                  { label: 'Golden Retriever', url: '/breeds/golden-retriever' },
+                  { label: 'Playful Signals', url: '/body-language/playful' },
+                  { label: 'Leash Pulling', url: '/problems/leash-pulling' }
+                ].map((item) => (
                   <button
-                    key={tag}
-                    onClick={() => setQuery(tag)}
+                    key={item.label}
+                    onClick={() => handleSelect(item.url)}
                     className="px-2.5 py-1 rounded-lg bg-[#FAF7F2] border border-[#E3DAC8] text-[#5C4F44] hover:text-[#234231] hover:border-[#8C5E3C] transition-colors cursor-pointer"
                   >
-                    {tag}
+                    {item.label}
                   </button>
                 ))}
               </div>
@@ -165,15 +168,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             searchResults.map((res) => (
               <div
                 key={res.id}
-                onClick={() => {
-                  onSelectPayload(res.payload);
-                  onClose();
-                }}
+                onClick={() => handleSelect(res.url)}
                 className="p-3.5 rounded-xl hover:bg-[#FAF7F2] border border-transparent hover:border-[#E3DAC8] transition-all cursor-pointer flex items-center justify-between group"
               >
                 <div>
                   <div className="flex items-center gap-2 text-[11px] font-semibold text-[#8C5E3C]">
                     <span>{res.category}</span>
+                    <span className="text-[#C4B7A6]">·</span>
+                    <span className="font-mono text-[10px] text-[#A89A8E]">{res.url}</span>
                   </div>
                   <h4 className="text-sm font-semibold text-[#234231] font-display mt-0.5 group-hover:text-[#8C5E3C] transition-colors">
                     {res.title}

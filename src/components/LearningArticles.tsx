@@ -2,9 +2,10 @@ import React from 'react';
 import { guideArticles, ArticleItem } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { BookOpen, Clock, ArrowUpRight } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface LearningArticlesProps {
-  onSelectArticle: (article: ArticleItem) => void;
+  onSelectArticle?: (article: ArticleItem) => void;
 }
 
 export const LearningArticles: React.FC<LearningArticlesProps> = ({ onSelectArticle }) => {
@@ -28,12 +29,13 @@ export const LearningArticles: React.FC<LearningArticlesProps> = ({ onSelectArti
         </p>
       </div>
 
-      {/* Grid of 6 Articles */}
+      {/* Grid of 6 Articles with unique URLs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         {guideArticles.map((art) => (
-          <article
+          <Link
             key={art.id}
-            onClick={() => onSelectArticle(art)}
+            href={`/guides/${art.id}`}
+            onClick={() => onSelectArticle && onSelectArticle(art)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
             <div className="relative aspect-[16/10] overflow-hidden">
@@ -76,7 +78,7 @@ export const LearningArticles: React.FC<LearningArticlesProps> = ({ onSelectArti
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 

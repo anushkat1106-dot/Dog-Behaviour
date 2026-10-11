@@ -1,7 +1,8 @@
 import React from 'react';
 import { ageStages, AgeStage } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { Clock, CheckCircle } from 'lucide-react';
+import { Clock } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface AgeStagesProps {
   onSelectStage?: (stage: AgeStage) => void;
@@ -28,11 +29,12 @@ export const AgeStages: React.FC<AgeStagesProps> = ({ onSelectStage }) => {
         </p>
       </div>
 
-      {/* 4 Cards Grid */}
+      {/* 4 Cards Grid with unique URLs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {ageStages.map((stage) => (
-          <div
+          <Link
             key={stage.id}
+            href={`/age-stages/${stage.id}`}
             onClick={() => onSelectStage && onSelectStage(stage)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
@@ -69,13 +71,12 @@ export const AgeStages: React.FC<AgeStagesProps> = ({ onSelectStage }) => {
                 </ul>
               </div>
 
-              <div className="pt-2 text-right">
-                <span className="text-xs font-semibold text-[#8C5E3C] group-hover:underline">
-                  View Age Details →
-                </span>
+              <div className="mt-4 pt-3 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
+                <span>View Full Stage Guide</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

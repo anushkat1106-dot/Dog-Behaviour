@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { bodyLanguageStates, BodyLanguageState } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { Info, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface BodyLanguageGridProps {
   onSelectState?: (state: BodyLanguageState) => void;
@@ -102,10 +103,15 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                   <p><strong className="text-[#234231]">Ears:</strong> {state.ears}</p>
                 </div>
 
-                <div className="pt-2 text-right">
-                  <span className="text-[11px] font-semibold text-[#8C5E3C] group-hover:underline">
-                    View Anatomy Cues →
-                  </span>
+                <div className="pt-2 flex items-center justify-between text-[11px] font-semibold text-[#8C5E3C]">
+                  <span>Inspect posture</span>
+                  <Link
+                    href={`/body-language/${state.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="hover:underline flex items-center gap-0.5"
+                  >
+                    Dedicated Page <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -133,9 +139,13 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                     {selectedState.emotion}
                   </h3>
                 </div>
-                <div className="text-xs text-[#5C4F44]">
-                  Full ethogram posture analysis
-                </div>
+                <Link
+                  href={`/body-language/${selectedState.id}`}
+                  className="px-3.5 py-1.5 text-xs font-semibold text-[#234231] bg-white hover:bg-[#FAF7F2] border border-[#DDD3C0] rounded-lg transition-colors flex items-center gap-1"
+                >
+                  <span>Open Full Page URL</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">

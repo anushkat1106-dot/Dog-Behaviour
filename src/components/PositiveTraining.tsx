@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { trainingMethods, TrainingMethod } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { Award, Check, Sparkles, ChevronRight } from 'lucide-react';
+import { Award, Sparkles, ChevronRight, ArrowRight } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface PositiveTrainingProps {
-  onSelectMethod: (method: TrainingMethod) => void;
+  onSelectMethod?: (method: TrainingMethod) => void;
 }
 
 export const PositiveTraining: React.FC<PositiveTrainingProps> = ({ onSelectMethod }) => {
@@ -40,7 +41,10 @@ export const PositiveTraining: React.FC<PositiveTrainingProps> = ({ onSelectMeth
             return (
               <div
                 key={method.id}
-                onClick={() => setSelectedMethod(method)}
+                onClick={() => {
+                  setSelectedMethod(method);
+                  if (onSelectMethod) onSelectMethod(method);
+                }}
                 className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
                   isSelected
                     ? 'bg-[#234231] text-white border-[#234231] shadow-xs'
@@ -109,12 +113,13 @@ export const PositiveTraining: React.FC<PositiveTrainingProps> = ({ onSelectMeth
             </div>
 
             <div className="pt-2 text-right">
-              <button
-                onClick={() => onSelectMethod(selectedMethod)}
-                className="px-4 py-2 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE1D3] rounded-lg border border-[#DDD3C0] transition-colors cursor-pointer"
+              <Link
+                href={`/training/${selectedMethod.id}`}
+                className="px-4 py-2 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE1D3] rounded-lg border border-[#DDD3C0] transition-colors inline-flex items-center gap-1.5"
               >
-                Expand Comprehensive Guide →
-              </button>
+                <span>Dedicated Guide URL</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#8C5E3C]" />
+              </Link>
             </div>
           </div>
         </div>

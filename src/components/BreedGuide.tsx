@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { breedBehaviors, BreedInfo } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { Shield, Sparkles } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface BreedGuideProps {
-  onSelectBreed: (breed: BreedInfo) => void;
+  onSelectBreed?: (breed: BreedInfo) => void;
 }
 
 export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
@@ -62,12 +62,13 @@ export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
         </div>
       </div>
 
-      {/* Grid */}
+      {/* Grid with unique URLs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredBreeds.map((breed) => (
-          <div
+          <Link
             key={breed.id}
-            onClick={() => onSelectBreed(breed)}
+            href={`/breeds/${breed.id}`}
+            onClick={() => onSelectBreed && onSelectBreed(breed)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
             <div className="relative aspect-[4/3] overflow-hidden">
@@ -85,7 +86,6 @@ export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
 
             <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
               <div>
-                {/* Temperament traits (unboxed text with separators per design rules) */}
                 <div className="text-xs text-[#8C5E3C] font-medium flex flex-wrap gap-1 mb-2">
                   {breed.temperament.map((t, idx) => (
                     <React.Fragment key={t}>
@@ -105,7 +105,7 @@ export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

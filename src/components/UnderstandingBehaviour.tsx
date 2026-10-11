@@ -1,10 +1,11 @@
 import React from 'react';
 import { coreBehaviours, DogBehaviourItem } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { Link } from '../context/RouterContext';
 
 interface UnderstandingBehaviourProps {
-  onSelectItem: (item: DogBehaviourItem) => void;
+  onSelectItem?: (item: DogBehaviourItem) => void;
 }
 
 export const UnderstandingBehaviour: React.FC<UnderstandingBehaviourProps> = ({ onSelectItem }) => {
@@ -30,9 +31,10 @@ export const UnderstandingBehaviour: React.FC<UnderstandingBehaviourProps> = ({ 
       {/* Grid of Behaviour Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
         {coreBehaviours.map((item, index) => (
-          <div
+          <Link
             key={item.id}
-            onClick={() => onSelectItem(item)}
+            href={`/behaviour/${item.id}`}
+            onClick={() => onSelectItem && onSelectItem(item)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
             {/* Visual Header */}
@@ -63,11 +65,11 @@ export const UnderstandingBehaviour: React.FC<UnderstandingBehaviourProps> = ({ 
               </div>
 
               <div className="mt-5 pt-4 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>Tap to view full protocol</span>
+                <span>View Full Ethology Guide</span>
                 <span className="group-hover:translate-x-0.5 transition-transform">→</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
