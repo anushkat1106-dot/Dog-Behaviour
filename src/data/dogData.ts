@@ -5,6 +5,24 @@ import trainingImg from '../assets/images/dog_positive_reinforcement_training_17
 import stressImg from '../assets/images/dog_stress_signals_1791426722278.jpg';
 import retrieverImg from '../assets/images/dog_breed_retriever_1791426733479.jpg';
 
+export interface BehaviourSubsection {
+  id: string;
+  h2: string; // Formatted question subheading for GEO / AEO
+  badge?: string;
+  intro: string;
+  paragraphs: string[];
+  qnaSection?: {
+    question: string;
+    answer: string;
+  };
+  keyTakeaways?: string[];
+  image?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
+}
+
 export interface DogBehaviourItem {
   id: string;
   title: string;
@@ -16,6 +34,7 @@ export interface DogBehaviourItem {
   whatToDo: string[];
   whatToAvoid: string[];
   ethologyNote: string;
+  subsections?: BehaviourSubsection[];
 }
 
 export interface BodyLanguageState {
@@ -113,7 +132,65 @@ export const coreBehaviours: DogBehaviourItem[] = [
       'Never yell or shout "Quiet!"—your dog perceives human shouting as barking along in excitement.',
       'Avoid punitive shock or citronella bark collars, which mask emotional distress with fear.'
     ],
-    ethologyNote: 'Ethologists have found that dogs alter pitch and interval systematically: lower pitch signals threat/defense, while higher pitch signals playfulness or distress.'
+    ethologyNote: 'Ethologists have found that dogs alter pitch and interval systematically: lower pitch signals threat/defense, while higher pitch signals playfulness or distress.',
+    subsections: [
+      {
+        id: 'midnight-barking',
+        h2: 'Why do dogs bark at midnight?',
+        badge: 'Nocturnal Ethology',
+        intro: 'Few occurrences are more jarring for pet parents than being violently jolted awake at 2:00 AM by frantic, echoing dog barks directed into a pitch-black hallway or empty backyard.',
+        paragraphs: [
+          'Canine auditory perception operates across a vastly wider spectrum than human hearing. While healthy human ears detect frequencies up to approximately 20,000 Hz, canine hearing reaches an astonishing 45,000 to 65,000 Hz, allowing dogs to register acoustic vibrations four times farther away than their owners.',
+          'QUESTION: What triggers sudden dog barking at midnight when the house is completely quiet? ANSWER: The primary catalyst is the dramatic drop in daytime ambient masking noise. During the afternoon, background traffic hum, running appliances, and television chatter obscure distant sounds. When the neighborhood falls silent at midnight, faint nocturnal wildlife (raccoons, possums, owls, wandering foxes, or rodents scurrying inside wall cavities) stands out with crystalline clarity to a dog’s acute ears.',
+          'Cool nocturnal air currents also channel novel olfactory scent plumes directly under exterior doors and through window seals. When an alert canine catches the fresh scent trail of a feral cat or raccoon traversing their property perimeter, their sympathetic nervous system activates an immediate territorial warning broadcast.',
+          'In aging dogs (typically over 8 to 10 years old), sudden midnight vocalizations can signal Canine Cognitive Dysfunction (CCD), colloquially known as canine dementia or sundowning. Cognitive changes disrupt circadian sleep-wake cycles, producing nocturnal disorientation, confusion, and anxiety when waking in the dark.',
+          'Lastly, well-meaning owners frequently create accidental operant reinforcement loops. If you get out of bed, turn on the lights, speak soothingly, or offer a spoonful of peanut butter to quiet your barking dog at 1:00 AM, your dog quickly learns that nighttime vocalization reliably summons their beloved human companion.'
+        ],
+        qnaSection: {
+          question: 'How do I stop my dog from barking at noises in the middle of the night?',
+          answer: 'Deploy a dual-speed mechanical white noise machine or low-volume ambient music in the dog’s sleeping area to buffer sudden decibel spikes from outside. Close blackout curtains to block passing headlights and nocturnal shadows. Move your dog’s bed into your bedroom, where close proximity to your calm scent naturally reduces autonomic vigilance.'
+        },
+        keyTakeaways: [
+          'Dogs hear ultrasonic frequencies (up to 65,000 Hz) that reveal nocturnal critters invisible to humans.',
+          'Drop in daytime ambient noise magnifies faint outdoor sounds like nocturnal wildlife or distant sirens.',
+          'In senior dogs, midnight pacing and barking often indicate Canine Cognitive Dysfunction or arthritis pain.',
+          'Avoid getting out of bed to offer treats or high-attention cuddles, which accidentally rewards night barking.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1534361960057-19889db98a1e?auto=format&fit=crop&w=800&q=75',
+          alt: 'Alert dog awake at midnight listening intently with pricked ears to nocturnal sounds',
+          caption: 'Canines possess acute nocturnal hearing, picking up subtle wildlife footsteps and drafts through closed windows.'
+        }
+      },
+      {
+        id: 'vehicle-barking',
+        h2: 'Why do dogs bark at vehicles?',
+        badge: 'Predatory Drive & Barrier Frustration',
+        intro: 'Whether it is a roaring motorcycle, a speeding postal van, a passing sedan, or a neighborhood child riding a bicycle, moving vehicles frequently trigger explosive, lunging barking episodes in dogs.',
+        paragraphs: [
+          'To understand vehicle reactivity, we must examine the evolutionary predatory motor pattern inherent to all canids: Orient → Eye → Stalk → Chase → Grab-Bite. When a high-velocity mechanical object speeds across a dog’s visual field, their ancient predatory chase drive is instantly aroused.',
+          'When a dog is physically restrained behind a living room window, a backyard fence, or a 6-foot walking leash, they are biologically thwarted from fulfilling the chase impulse. This restraint produces intense "barrier frustration"—a physiological state of high autonomic arousal where blocked motor energy combusts into frantic barking, spinning, and lunging.',
+          'QUESTION: Why do dogs bark at passing cars if the car never attacks them? ANSWER: In the dog’s cognitive framework, their vocalization produces a 100% success rate! Every single time a car drives past the front window, the dog erupts in furious barks, and within seconds, the car disappears down the road. The canine brain makes an immediate operant connection: "My ferocious barking successfully scared away the giant rumbling beast!" Because the vehicle always leaves, the territorial alert is reinforced every single day.',
+          'Furthermore, motor vehicles emit an overwhelming acoustic barrage for sensitive canines: low-frequency engine vibrations that shake floorboards, high-frequency tire friction sizzles on wet asphalt, squeaking brake calipers, and Doppler-shifted pitch distortions that can be genuinely terrifying or painful to canine ears.',
+          'Vehicles like delivery vans and garbage trucks are especially triggering because they combine massive visual silhouettes with loud pneumatic air brakes, frequent door slams, and unfamiliar human workers in uniform moving briskly along the property boundary.'
+        ],
+        qnaSection: {
+          question: 'What is the most effective positive training method to stop a dog from barking at cars?',
+          answer: 'Practice Leslie McDevitt’s scientifically validated "Look at That" (LAT) counter-conditioning game. Stand at a safe sub-threshold distance (where your dog can see moving vehicles without barking). The instant your dog looks at a passing car, mark with a clicker or verbal "Yes!" and deliver a pea-sized piece of roast chicken. Over 2 to 4 weeks, looking at a vehicle transforms from a cue to bark into a conditioned cue to calmly look at you for a high-value reward.'
+        },
+        keyTakeaways: [
+          'Rapid visual motion triggers hardwired predatory chase motor patterns.',
+          'Leashes and windows create severe barrier frustration when the dog cannot pursue the moving trigger.',
+          'Dogs believe their barking drove the car away, because vehicles always drive off down the street.',
+          'Counter-condition vehicle reactivity using the Look at That (LAT) protocol with high-value food rewards.'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=75',
+          alt: 'Dog on leash focusing attentively on handler instead of barking at passing vehicle',
+          caption: 'Teaching an incompatible focus cue transforms vehicle reactivity into calm eye contact.'
+        }
+      }
+    ]
   },
   {
     id: 'why-dogs-wag-tails',

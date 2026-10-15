@@ -5,6 +5,24 @@ export interface QnAItem {
 
 // 1. Dedicated Q&A for Guide Articles (Learning Articles)
 export const guideArticleQnA: Record<string, QnAItem[]> = {
+  'why-dogs-bark': [
+    {
+      question: 'Why do dogs bark at midnight when nothing is there?',
+      answer: 'Dogs hear frequencies up to 65,000 Hz and can detect sounds four times farther away than humans. At midnight, when human daytime noise drops, faint outdoor wildlife (raccoons, possums, mice, owls) and nocturnal temperature-driven scent plumes become intensely noticeable to your dog, triggering alarm barking. Sound masking and blackout curtains quickly resolve this.'
+    },
+    {
+      question: 'Why do dogs bark and lunge at moving vehicles?',
+      answer: 'Moving vehicles trigger the predatory chase drive (Orient → Eye → Stalk → Chase). When on leash or behind windows, dogs experience barrier frustration because they cannot complete the chase. Also, because cars drive away down the street, dogs believe their barking successfully scared the car off. Use the "Look at That" (LAT) counter-conditioning protocol to retrain focus.'
+    },
+    {
+      question: 'Does yelling "Stop barking!" or "Quiet!" work?',
+      answer: 'No. Shouting sounds like loud barking to canine ears. Your dog interprets your raised voice as social facilitation—believing you are excitedly barking along with them. Speak in calm, soft tones and redirect to an incompatible behavior.'
+    },
+    {
+      question: 'How do pitch and frequency change the meaning of a bark?',
+      answer: 'Low-pitched, rumbling barks signal a request for distance or territorial defense. High-pitched, bouncy, staccato yips convey playfulness, invitation, or excitement. Rapid barking without pauses indicates high alert arousal.'
+    }
+  ],
   'why-bark-at-strangers': [
     {
       question: 'Why does my dog bark at strangers outside the window, but acts friendly at the dog park?',
@@ -123,6 +141,14 @@ export const guideArticleQnA: Record<string, QnAItem[]> = {
 // 2. Q&A for Core Behaviours (/b/*)
 export const behaviourQnA: Record<string, QnAItem[]> = {
   'why-dogs-bark': [
+    {
+      question: 'Why do dogs bark at midnight?',
+      answer: 'Dogs possess ultrasonic auditory perception reaching up to 65,000 Hz. Late at night, human ambient noise drops, making distant nocturnal wildlife (raccoons, owls, rodents in walls) crystal clear. In senior dogs, midnight barking can also stem from Canine Cognitive Dysfunction (CCD) or arthritis discomfort. A mechanical white noise machine and blackout curtains reliably eliminate these nocturnal sensory spikes.'
+    },
+    {
+      question: 'Why do dogs bark at vehicles (cars, motorcycles, bicycles)?',
+      answer: 'High-speed vehicles trigger the instinctual predatory chase drive (Orient → Eye → Stalk → Chase). Being restrained by a leash or fence creates intense barrier frustration. Furthermore, every time a car drives by and disappears down the street, the dog believes their barking chased the mechanical intruder away. Positive counter-conditioning with the Look at That (LAT) protocol replaces this frustration with calm focus.'
+    },
     {
       question: 'Can you train a dog to never bark at all?',
       answer: 'No, nor should you attempt to. Barking is a natural species-typical canine communication tool, equivalent to human talking. The goal of ethical positive training is not zero barking, but reducing frantic, persistent, or fear-based vocalizations to manageable, calm levels.'
@@ -558,6 +584,18 @@ export const homePageQnAList: HomeQnAItem[] = [
     categoryLabel: 'Barking & Communication',
     question: 'Why does my dog bark incessantly whenever the doorbell rings?',
     answer: 'The doorbell is an acoustic trigger signaling an intrusion into the dog’s core safety territory. Because the visitor or delivery driver walks away shortly after, the dog believes their barking successfully defended the home. Counter-conditioning with a "Go to Mat" protocol rewires this response.'
+  },
+  {
+    category: 'barking',
+    categoryLabel: 'Barking & Communication',
+    question: 'Why do dogs bark at midnight into empty rooms or dark backyards?',
+    answer: 'Dogs hear up to 65,000 Hz (over triple human ceiling) and can detect sounds 4x farther away. At midnight, ambient household noise drops to near zero, making faint nocturnal wildlife (raccoons, rodents, owls) and drafts stand out starkly. In senior dogs, it can also reflect sundowning. Use a white noise machine and blackout curtains to calm nocturnal vigilance.'
+  },
+  {
+    category: 'barking',
+    categoryLabel: 'Barking & Communication',
+    question: 'Why do dogs bark and lunge at moving vehicles like cars, trucks, and bicycles?',
+    answer: 'Rapid motion triggers the canine predatory chase drive (Orient → Eye → Stalk → Chase). Being restrained on a leash or behind window glass creates barrier frustration. Plus, because cars drive past and vanish, the dog believes their barking chased the intruder away! The "Look at That" (LAT) counter-conditioning game effectively cures vehicle reactivity.'
   },
   {
     category: 'barking',

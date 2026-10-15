@@ -3,7 +3,7 @@ import { coreBehaviours } from '../data/dogData';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
-import { CheckCircle2, AlertTriangle, ArrowRight, Compass } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, ArrowRight, Compass, HelpCircle, Sparkles, BookOpen } from 'lucide-react';
 import { getBehaviourUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
 import { usePageSEO } from '../utils/usePageSEO';
@@ -19,7 +19,13 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
     title: item ? `${item.title} - Canine Ethology & Behaviour Guide | CanineMind` : 'Dog Behaviour Guide | CanineMind',
     description: item ? `Learn why dogs perform ${item.title.toLowerCase()}, decode underlying evolutionary causes, and discover positive reinforcement solutions.` : 'Explore comprehensive canine ethology and behavior guides.',
     canonicalPath: item ? getBehaviourUrl(item.id) : '/b',
-    keywords: item ? [item.title.toLowerCase(), 'dog behaviour', 'canine ethology', 'dog psychology'] : ['dog behaviour']
+    keywords: item ? [
+      item.title.toLowerCase(),
+      'dog behaviour',
+      'canine ethology',
+      'dog psychology',
+      ...(item.subsections ? item.subsections.map(s => s.h2.toLowerCase()) : [])
+    ] : ['dog behaviour']
   });
 
   if (!item) {
@@ -82,6 +88,33 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
             </p>
           </div>
 
+          {/* Quick-Jump Subheadings Table of Contents */}
+          {item.subsections && item.subsections.length > 0 && (
+            <div className="p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8DFC8]">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="w-4 h-4 text-[#8C5E3C]" />
+                <span className="text-xs font-bold text-[#8C5E3C] uppercase tracking-wider">
+                  In-Depth Subsections in This Guide
+                </span>
+              </div>
+              <p className="text-xs text-[#6E5D53] mb-3">
+                Explore specialized ethological breakdowns and solutions for specific vocalization contexts:
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {item.subsections.map((sub) => (
+                  <a
+                    key={sub.id}
+                    href={`#${sub.id}`}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#DDD3C0] hover:border-[#8C5E3C] hover:bg-[#F5EFE6] text-xs font-semibold text-[#234231] hover:text-[#8C5E3C] transition-all shadow-2xs"
+                  >
+                    <span>{sub.h2}</span>
+                    <span className="text-[#8C5E3C]">↓</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Why It Happens */}
           <div className="pt-6 border-t border-[#F0EAE0]">
             <h2 className="text-lg font-bold font-display text-[#234231] mb-4">
@@ -98,6 +131,100 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
               ))}
             </div>
           </div>
+
+          {/* Dedicated Subheadings (e.g. Why do dogs bark at midnight? & Why do dogs bark at vehicles?) */}
+          {item.subsections && item.subsections.map((sub) => (
+            <section
+              key={sub.id}
+              id={sub.id}
+              className="pt-8 border-t border-[#F0EAE0] scroll-mt-6"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                {sub.badge && (
+                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E07A5F]/15 text-[#A84328]">
+                    {sub.badge}
+                  </span>
+                )}
+                <span className="text-xs font-semibold text-[#8C5E3C]">Canine Science Investigation</span>
+              </div>
+
+              {/* Exact H2 Heading requested by user */}
+              <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#234231] tracking-tight mb-3">
+                {sub.h2}
+              </h2>
+
+              <p className="text-sm sm:text-base font-medium text-[#234231]/95 leading-relaxed mb-4 bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFC8]">
+                {sub.intro}
+              </p>
+
+              <div className="space-y-4 text-sm sm:text-base text-[#4E4137] leading-relaxed">
+                {sub.paragraphs.map((para, pIdx) => {
+                  const isQA = para.startsWith('QUESTION:');
+                  if (isQA) {
+                    const parts = para.split('ANSWER:');
+                    const qText = parts[0].replace('QUESTION:', '').trim();
+                    const aText = parts[1]?.trim() || '';
+                    return (
+                      <div
+                        key={pIdx}
+                        className="my-5 p-5 bg-[#234231]/5 rounded-2xl border-l-4 border-[#234231] text-xs sm:text-sm"
+                      >
+                        <p className="font-bold text-[#234231] mb-1.5 flex items-center gap-2">
+                          <HelpCircle className="w-4 h-4 text-[#E07A5F] shrink-0" />
+                          <span>{qText}</span>
+                        </p>
+                        <p className="text-[#5C4F44] leading-relaxed">{aText}</p>
+                      </div>
+                    );
+                  }
+                  return <p key={pIdx}>{para}</p>;
+                })}
+              </div>
+
+              {sub.image && (
+                <div className="my-6 rounded-2xl overflow-hidden border border-[#E3DAC8] bg-[#F4EFE6]">
+                  <DogImage
+                    src={sub.image.src}
+                    alt={sub.image.alt}
+                    className="w-full aspect-[21/9] sm:aspect-[2.5/1] object-cover"
+                  />
+                  <p className="p-3 text-xs text-[#6E5D53] bg-white border-t border-[#E8DFC8] italic">
+                    {sub.image.caption}
+                  </p>
+                </div>
+              )}
+
+              {sub.keyTakeaways && sub.keyTakeaways.length > 0 && (
+                <div className="mt-5 p-5 bg-white rounded-2xl border border-[#E2D8C3] shadow-xs">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#8C5E3C] mb-3">
+                    Key Takeaways: {sub.h2}
+                  </h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#5C4F44]">
+                    {sub.keyTakeaways.map((takeaway, tIdx) => (
+                      <li key={tIdx} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#234231] shrink-0 mt-0.5" />
+                        <span>{takeaway}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {sub.qnaSection && (
+                <div className="mt-4 p-4 rounded-xl bg-[#FBF7F0] border border-[#E8DFC8] flex items-start gap-3">
+                  <Sparkles className="w-4 h-4 text-[#E07A5F] shrink-0 mt-0.5" />
+                  <div className="text-xs">
+                    <span className="font-bold text-[#234231] block mb-1">
+                      Quick Q&A: {sub.qnaSection.question}
+                    </span>
+                    <span className="text-[#5C4F44] leading-relaxed">
+                      {sub.qnaSection.answer}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </section>
+          ))}
 
           {/* Do and Avoid */}
           <div className="pt-6 border-t border-[#F0EAE0] grid grid-cols-1 md:grid-cols-2 gap-6">
