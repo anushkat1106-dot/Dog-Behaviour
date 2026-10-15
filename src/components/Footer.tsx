@@ -132,7 +132,7 @@ export const Footer: React.FC = () => {
             <p className="font-semibold text-white uppercase tracking-wider mb-3">About & Help</p>
             <ul className="space-y-2 text-white/70">
               <li><Link href="/about" className="hover:text-white transition-colors">About Our Mission</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors">Questions (FAQ)</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">Questions & Answers (Q&A)</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors">Veterinary Disclaimer</Link></li>
               <li><span className="text-white/50">Ethical Canine Care</span></li>
             </ul>

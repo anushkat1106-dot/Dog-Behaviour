@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import { getProblemUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -126,6 +127,9 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
               ))}
             </ul>
           </div>
+
+          {/* Problem Q&A */}
+          <ArticleQnA category="problem" id={item.id} topicTitle={item.title} />
 
           {/* Bottom actions */}
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">

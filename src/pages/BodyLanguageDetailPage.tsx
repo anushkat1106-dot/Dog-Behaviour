@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { getSignalUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -105,6 +106,9 @@ export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
               {item.recommendedAction}
             </p>
           </div>
+
+          {/* Body Language Q&A */}
+          <ArticleQnA category="signal" id={item.id} topicTitle={item.emotion} />
 
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
             <Link

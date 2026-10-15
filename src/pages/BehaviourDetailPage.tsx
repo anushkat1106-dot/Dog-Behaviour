@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { CheckCircle2, AlertTriangle, ArrowRight, Compass } from 'lucide-react';
 import { getBehaviourUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -137,6 +138,9 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
               <p className="text-xs text-[#5C4F44] leading-relaxed">{item.ethologyNote}</p>
             </div>
           </div>
+
+          {/* Behaviour Q&A */}
+          <ArticleQnA category="behaviour" id={item.id} topicTitle={item.title} />
 
           {/* Next steps */}
           <div className="pt-8 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">

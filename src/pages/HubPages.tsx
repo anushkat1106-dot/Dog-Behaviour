@@ -181,13 +181,13 @@ export const AboutHubPage: React.FC = () => {
 
 export const FaqHubPage: React.FC = () => {
   useEffect(() => {
-    document.title = 'Frequently Asked Dog Questions | CanineMind';
+    document.title = 'Dog Behaviour Q&A - Frequently Asked Questions | CanineMind';
   }, []);
 
   return (
     <div className="py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'Frequently Asked Questions' }]} />
+        <Breadcrumbs items={[{ label: 'Questions & Answers (Q&A)' }]} />
       </div>
       <FaqSection />
     </div>

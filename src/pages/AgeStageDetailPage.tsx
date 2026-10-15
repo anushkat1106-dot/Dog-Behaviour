@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { getAgeStageUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -114,6 +115,9 @@ export const AgeStageDetailPage: React.FC<Props> = ({ id }) => {
               </ul>
             </div>
           </div>
+
+          {/* Age Stage Q&A */}
+          <ArticleQnA category="age" id={item.id} topicTitle={`${item.stage} (${item.ageRange})`} />
 
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
             <Link

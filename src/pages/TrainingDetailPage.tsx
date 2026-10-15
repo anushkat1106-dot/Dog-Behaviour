@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { CheckCircle2, Sparkles, ArrowRight, Award } from 'lucide-react';
 import { getTrainingUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -113,6 +114,9 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
               <p className="text-xs text-[#5C4F44] leading-relaxed">{item.proTip}</p>
             </div>
           </div>
+
+          {/* Training Q&A */}
+          <ArticleQnA category="training" id={item.id} topicTitle={item.name} />
 
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
             <Link

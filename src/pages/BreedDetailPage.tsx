@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { Sparkles, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 import { getBreedUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -115,6 +116,9 @@ export const BreedDetailPage: React.FC<Props> = ({ id }) => {
               </p>
             </div>
           </div>
+
+          {/* Breed Q&A */}
+          <ArticleQnA category="breed" id={item.id} topicTitle={item.name} />
 
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
             <Link

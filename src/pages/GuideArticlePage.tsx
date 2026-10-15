@@ -5,6 +5,7 @@ import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { Clock, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { getGuideUrl } from '../utils/slugs';
+import { ArticleQnA } from '../components/ArticleQnA';
 
 interface Props {
   id: string;
@@ -100,6 +101,9 @@ export const GuideArticlePage: React.FC<Props> = ({ id }) => {
               ))}
             </ul>
           </div>
+
+          {/* Article Specific Q&A */}
+          <ArticleQnA category="guide" id={item.id} topicTitle={item.title} />
 
           {/* Bottom Actions */}
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
