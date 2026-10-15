@@ -3,6 +3,7 @@ import { bodyLanguageStates, BodyLanguageState } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getSignalUrl } from '../utils/slugs';
 
 interface BodyLanguageGridProps {
   onSelectState?: (state: BodyLanguageState) => void;
@@ -66,6 +67,7 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredStates.map((state) => {
           const isSelected = selectedState?.id === state.id;
+          const shortUrl = getSignalUrl(state.id);
           return (
             <div
               key={state.id}
@@ -106,7 +108,7 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                 <div className="pt-2 flex items-center justify-between text-[11px] font-semibold text-[#8C5E3C]">
                   <span>Inspect posture</span>
                   <Link
-                    href={`/body-language/${state.id}`}
+                    href={shortUrl}
                     onClick={(e) => e.stopPropagation()}
                     className="hover:underline flex items-center gap-0.5"
                   >
@@ -140,10 +142,10 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                   </h3>
                 </div>
                 <Link
-                  href={`/body-language/${selectedState.id}`}
+                  href={getSignalUrl(selectedState.id)}
                   className="px-3.5 py-1.5 text-xs font-semibold text-[#234231] bg-white hover:bg-[#FAF7F2] border border-[#DDD3C0] rounded-lg transition-colors flex items-center gap-1"
                 >
-                  <span>Open Full Page URL</span>
+                  <span>View Full Signal Profile</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

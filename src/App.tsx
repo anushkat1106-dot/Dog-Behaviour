@@ -42,8 +42,19 @@ import {
   FaqHubPage
 } from './pages/HubPages';
 
+// Slug Resolvers for Short URLs
+import {
+  resolveBehaviourId,
+  resolveSignalId,
+  resolveProblemId,
+  resolveTrainingId,
+  resolveBreedId,
+  resolveAgeStageId,
+  resolveGuideId
+} from './utils/slugs';
+
 function AppContent() {
-  const { path, params } = useRouter();
+  const { path } = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Keyboard shortcut Cmd+K / Ctrl+K for search
@@ -68,7 +79,7 @@ function AppContent() {
     }
   }, [path]);
 
-  // Route Renderer
+  // Route Renderer with Short Unique URLs
   const renderRoute = () => {
     // 1. Home
     if (path === '/' || path === '') {
@@ -91,66 +102,94 @@ function AppContent() {
       );
     }
 
-    // 2. Behaviours
+    // 2. Behaviours: short `/b/:slug` or legacy `/behaviour/:id`
+    if (path.startsWith('/b/')) {
+      const slug = path.replace('/b/', '').split('/')[0];
+      return <BehaviourDetailPage id={resolveBehaviourId(slug)} />;
+    }
     if (path.startsWith('/behaviour/')) {
       const id = path.replace('/behaviour/', '').split('/')[0];
-      return <BehaviourDetailPage id={id} />;
+      return <BehaviourDetailPage id={resolveBehaviourId(id)} />;
     }
-    if (path === '/behaviour') {
+    if (path === '/b' || path === '/behaviour') {
       return <BehaviourHubPage />;
     }
 
-    // 3. Body Language
+    // 3. Body Signals: short `/s/:slug` or legacy `/body-language/:id`
+    if (path.startsWith('/s/')) {
+      const slug = path.replace('/s/', '').split('/')[0];
+      return <BodyLanguageDetailPage id={resolveSignalId(slug)} />;
+    }
     if (path.startsWith('/body-language/')) {
       const id = path.replace('/body-language/', '').split('/')[0];
-      return <BodyLanguageDetailPage id={id} />;
+      return <BodyLanguageDetailPage id={resolveSignalId(id)} />;
     }
-    if (path === '/body-language') {
+    if (path === '/s' || path === '/signals' || path === '/body-language') {
       return <BodyLanguageHubPage />;
     }
 
-    // 4. Common Problems
+    // 4. Common Problems / Fixes: short `/fix/:slug` or legacy `/problems/:id`
+    if (path.startsWith('/fix/')) {
+      const slug = path.replace('/fix/', '').split('/')[0];
+      return <ProblemDetailPage id={resolveProblemId(slug)} />;
+    }
     if (path.startsWith('/problems/')) {
       const id = path.replace('/problems/', '').split('/')[0];
-      return <ProblemDetailPage id={id} />;
+      return <ProblemDetailPage id={resolveProblemId(id)} />;
     }
-    if (path === '/problems') {
+    if (path === '/fix' || path === '/problems') {
       return <ProblemsHubPage />;
     }
 
-    // 5. Training
+    // 5. Training: short `/t/:slug` or legacy `/training/:id`
+    if (path.startsWith('/t/')) {
+      const slug = path.replace('/t/', '').split('/')[0];
+      return <TrainingDetailPage id={resolveTrainingId(slug)} />;
+    }
     if (path.startsWith('/training/')) {
       const id = path.replace('/training/', '').split('/')[0];
-      return <TrainingDetailPage id={id} />;
+      return <TrainingDetailPage id={resolveTrainingId(id)} />;
     }
-    if (path === '/training') {
+    if (path === '/t' || path === '/train' || path === '/training') {
       return <TrainingHubPage />;
     }
 
-    // 6. Breeds
+    // 6. Breeds: short `/dog/:slug` or legacy `/breeds/:id`
+    if (path.startsWith('/dog/')) {
+      const slug = path.replace('/dog/', '').split('/')[0];
+      return <BreedDetailPage id={resolveBreedId(slug)} />;
+    }
     if (path.startsWith('/breeds/')) {
       const id = path.replace('/breeds/', '').split('/')[0];
-      return <BreedDetailPage id={id} />;
+      return <BreedDetailPage id={resolveBreedId(id)} />;
     }
-    if (path === '/breeds') {
+    if (path === '/dog' || path === '/breeds') {
       return <BreedsHubPage />;
     }
 
-    // 7. Life Stages
+    // 7. Life Stages: short `/age/:slug` or legacy `/age-stages/:id`
+    if (path.startsWith('/age/')) {
+      const slug = path.replace('/age/', '').split('/')[0];
+      return <AgeStageDetailPage id={resolveAgeStageId(slug)} />;
+    }
     if (path.startsWith('/age-stages/')) {
       const id = path.replace('/age-stages/', '').split('/')[0];
-      return <AgeStageDetailPage id={id} />;
+      return <AgeStageDetailPage id={resolveAgeStageId(id)} />;
     }
-    if (path === '/age-stages') {
+    if (path === '/age' || path === '/age-stages') {
       return <AgeStagesHubPage />;
     }
 
-    // 8. Learning Guides
+    // 8. Learning Guides / Articles: short `/g/:slug` or legacy `/guides/:id`
+    if (path.startsWith('/g/')) {
+      const slug = path.replace('/g/', '').split('/')[0];
+      return <GuideArticlePage id={resolveGuideId(slug)} />;
+    }
     if (path.startsWith('/guides/')) {
       const id = path.replace('/guides/', '').split('/')[0];
-      return <GuideArticlePage id={id} />;
+      return <GuideArticlePage id={resolveGuideId(id)} />;
     }
-    if (path === '/guides') {
+    if (path === '/g' || path === '/guides') {
       return <GuidesHubPage />;
     }
 
@@ -186,7 +225,7 @@ function AppContent() {
             Return to Homepage
           </Link>
           <Link
-            href="/guides"
+            href="/g"
             className="px-5 py-2.5 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE0D2] rounded-xl border border-[#DDD3C0] transition-colors"
           >
             Browse Guides

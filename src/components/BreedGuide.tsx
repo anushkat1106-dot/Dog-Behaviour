@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { breedBehaviors, BreedInfo } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { Link } from '../context/RouterContext';
+import { getBreedUrl } from '../utils/slugs';
 
 interface BreedGuideProps {
   onSelectBreed?: (breed: BreedInfo) => void;
@@ -62,12 +63,12 @@ export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
         </div>
       </div>
 
-      {/* Grid with unique URLs */}
+      {/* Grid with short unique URLs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredBreeds.map((breed) => (
           <Link
             key={breed.id}
-            href={`/breeds/${breed.id}`}
+            href={getBreedUrl(breed.id)}
             onClick={() => onSelectBreed && onSelectBreed(breed)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >

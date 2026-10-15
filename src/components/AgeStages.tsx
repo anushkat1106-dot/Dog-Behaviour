@@ -3,6 +3,7 @@ import { ageStages, AgeStage } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { Clock } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getAgeStageUrl } from '../utils/slugs';
 
 interface AgeStagesProps {
   onSelectStage?: (stage: AgeStage) => void;
@@ -29,12 +30,12 @@ export const AgeStages: React.FC<AgeStagesProps> = ({ onSelectStage }) => {
         </p>
       </div>
 
-      {/* 4 Cards Grid with unique URLs */}
+      {/* 4 Cards Grid with short unique URLs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {ageStages.map((stage) => (
           <Link
             key={stage.id}
-            href={`/age-stages/${stage.id}`}
+            href={getAgeStageUrl(stage.id)}
             onClick={() => onSelectStage && onSelectStage(stage)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >

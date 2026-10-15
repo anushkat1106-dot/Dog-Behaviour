@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, CheckCircle2, Heart } from 'lucide-react';
+import { CheckCircle2, Heart } from 'lucide-react';
 import { Link } from '../context/RouterContext';
 
-interface FooterProps {
-  onOpenDisclaimer?: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = () => {
+export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -97,15 +93,15 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
 
-        {/* Links grid with unique URLs */}
+        {/* Links grid with short unique URLs */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 text-xs">
           <div>
             <p className="font-semibold text-white uppercase tracking-wider mb-3">Dog Behaviour</p>
             <ul className="space-y-2 text-white/70">
-              <li><Link href="/behaviour/why-dogs-bark" className="hover:text-white transition-colors">Why Dogs Bark</Link></li>
-              <li><Link href="/behaviour/why-dogs-wag-tails" className="hover:text-white transition-colors">Tail Wagging Science</Link></li>
-              <li><Link href="/behaviour/why-dogs-chew" className="hover:text-white transition-colors">Why Dogs Chew</Link></li>
-              <li><Link href="/behaviour/why-dogs-dig" className="hover:text-white transition-colors">Why Dogs Dig</Link></li>
+              <li><Link href="/b/bark" className="hover:text-white transition-colors">Why Dogs Bark</Link></li>
+              <li><Link href="/b/wag" className="hover:text-white transition-colors">Tail Wagging</Link></li>
+              <li><Link href="/b/chew" className="hover:text-white transition-colors">Why Dogs Chew</Link></li>
+              <li><Link href="/b/dig" className="hover:text-white transition-colors">Why Dogs Dig</Link></li>
               <li><Link href="/decoder" className="hover:text-white transition-colors">Canine Decoder</Link></li>
             </ul>
           </div>
@@ -113,22 +109,22 @@ export const Footer: React.FC<FooterProps> = () => {
           <div>
             <p className="font-semibold text-white uppercase tracking-wider mb-3">Positive Training</p>
             <ul className="space-y-2 text-white/70">
-              <li><Link href="/training/positive-reinforcement" className="hover:text-white transition-colors">Positive Reinforcement (R+)</Link></li>
-              <li><Link href="/training/clicker-training" className="hover:text-white transition-colors">Clicker Timing</Link></li>
-              <li><Link href="/training/leash-training" className="hover:text-white transition-colors">Loose-Leash Walking</Link></li>
-              <li><Link href="/training/socialization" className="hover:text-white transition-colors">Canine Socialization</Link></li>
-              <li><Link href="/training" className="hover:text-white transition-colors">All Training Methods</Link></li>
+              <li><Link href="/t/rewards" className="hover:text-white transition-colors">Positive Reinforcement</Link></li>
+              <li><Link href="/t/clicker" className="hover:text-white transition-colors">Clicker Timing</Link></li>
+              <li><Link href="/t/leash" className="hover:text-white transition-colors">Loose Leash Walking</Link></li>
+              <li><Link href="/t/social" className="hover:text-white transition-colors">Early Socialization</Link></li>
+              <li><Link href="/t" className="hover:text-white transition-colors">All Training Techniques</Link></li>
             </ul>
           </div>
 
           <div>
             <p className="font-semibold text-white uppercase tracking-wider mb-3">Learning & Guides</p>
             <ul className="space-y-2 text-white/70">
-              <li><Link href="/guides" className="hover:text-white transition-colors">All Learning Guides</Link></li>
-              <li><Link href="/breeds" className="hover:text-white transition-colors">Dog Breed Instincts</Link></li>
-              <li><Link href="/age-stages" className="hover:text-white transition-colors">Puppyhood to Senior</Link></li>
-              <li><Link href="/problems" className="hover:text-white transition-colors">Common Problems</Link></li>
-              <li><Link href="/quiz" className="hover:text-white transition-colors">Canine Attunement Quiz</Link></li>
+              <li><Link href="/g" className="hover:text-white transition-colors">All Learning Guides</Link></li>
+              <li><Link href="/dog" className="hover:text-white transition-colors">Breed Instincts</Link></li>
+              <li><Link href="/age" className="hover:text-white transition-colors">Age & Life Stages</Link></li>
+              <li><Link href="/fix" className="hover:text-white transition-colors">Common Problem Fixes</Link></li>
+              <li><Link href="/quiz" className="hover:text-white transition-colors">Canine Communication Quiz</Link></li>
             </ul>
           </div>
 
@@ -136,9 +132,9 @@ export const Footer: React.FC<FooterProps> = () => {
             <p className="font-semibold text-white uppercase tracking-wider mb-3">About & Help</p>
             <ul className="space-y-2 text-white/70">
               <li><Link href="/about" className="hover:text-white transition-colors">About Our Mission</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors">Frequently Asked Questions</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors">Veterinary Safety Disclaimer</Link></li>
-              <li><span className="text-white/50">Privacy & Terms</span></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">Questions (FAQ)</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">Veterinary Disclaimer</Link></li>
+              <li><span className="text-white/50">Ethical Canine Care</span></li>
             </ul>
           </div>
         </div>

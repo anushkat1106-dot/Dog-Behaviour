@@ -4,6 +4,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { getSignalUrl } from '../utils/slugs';
 
 interface Props {
   id: string;
@@ -23,8 +24,8 @@ export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-display text-[#234231]">Signal Profile Not Found</h2>
         <p className="text-sm text-[#6E5D53] mt-2">The emotional body language state could not be located.</p>
-        <Link href="/body-language" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
-          View All Body Language States
+        <Link href="/s" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
+          View All Signals
         </Link>
       </div>
     );
@@ -35,10 +36,10 @@ export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <Breadcrumbs
-        backHref="/body-language"
+        backHref="/s"
         backLabel="All Signals"
         items={[
-          { label: 'Body Language', href: '/body-language' },
+          { label: 'Signals', href: '/s' },
           { label: item.emotion }
         ]}
       />
@@ -133,12 +134,13 @@ export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
           {otherStates.map((st) => (
             <Link
               key={st.id}
-              href={`/body-language/${st.id}`}
+              href={getSignalUrl(st.id)}
               className="group bg-white rounded-xl border border-[#E3DAC8] p-3 text-center hover:border-[#8C5E3C] transition-all block"
             >
               <h3 className="text-xs font-semibold text-[#234231] group-hover:text-[#8C5E3C] transition-colors">
                 {st.emotion}
               </h3>
+              <span className="text-[10px] text-[#8C5E3C] mt-1 block">Inspect State →</span>
             </Link>
           ))}
         </div>

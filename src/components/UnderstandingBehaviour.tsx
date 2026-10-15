@@ -3,6 +3,7 @@ import { coreBehaviours, DogBehaviourItem } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getBehaviourUrl } from '../utils/slugs';
 
 interface UnderstandingBehaviourProps {
   onSelectItem?: (item: DogBehaviourItem) => void;
@@ -33,7 +34,7 @@ export const UnderstandingBehaviour: React.FC<UnderstandingBehaviourProps> = ({ 
         {coreBehaviours.map((item, index) => (
           <Link
             key={item.id}
-            href={`/behaviour/${item.id}`}
+            href={getBehaviourUrl(item.id)}
             onClick={() => onSelectItem && onSelectItem(item)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >

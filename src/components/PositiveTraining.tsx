@@ -3,6 +3,7 @@ import { trainingMethods, TrainingMethod } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { Award, Sparkles, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getTrainingUrl } from '../utils/slugs';
 
 interface PositiveTrainingProps {
   onSelectMethod?: (method: TrainingMethod) => void;
@@ -114,10 +115,10 @@ export const PositiveTraining: React.FC<PositiveTrainingProps> = ({ onSelectMeth
 
             <div className="pt-2 text-right">
               <Link
-                href={`/training/${selectedMethod.id}`}
+                href={getTrainingUrl(selectedMethod.id)}
                 className="px-4 py-2 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE1D3] rounded-lg border border-[#DDD3C0] transition-colors inline-flex items-center gap-1.5"
               >
-                <span>Dedicated Guide URL</span>
+                <span>View Full Training Guide</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#8C5E3C]" />
               </Link>
             </div>

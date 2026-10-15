@@ -3,6 +3,7 @@ import { guideArticles, ArticleItem } from '../data/dogData';
 import { DogImage } from './DogImage';
 import { BookOpen, Clock, ArrowUpRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getGuideUrl } from '../utils/slugs';
 
 interface LearningArticlesProps {
   onSelectArticle?: (article: ArticleItem) => void;
@@ -29,12 +30,12 @@ export const LearningArticles: React.FC<LearningArticlesProps> = ({ onSelectArti
         </p>
       </div>
 
-      {/* Grid of 6 Articles with unique URLs */}
+      {/* Grid of 6 Articles with short unique URLs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         {guideArticles.map((art) => (
           <Link
             key={art.id}
-            href={`/guides/${art.id}`}
+            href={getGuideUrl(art.id)}
             onClick={() => onSelectArticle && onSelectArticle(art)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >
@@ -54,7 +55,6 @@ export const LearningArticles: React.FC<LearningArticlesProps> = ({ onSelectArti
 
             <div className="p-6 flex-1 flex flex-col justify-between">
               <div>
-                {/* Metadata: clean unboxed text with typographic separators (anti-pill discipline) */}
                 <div className="flex items-center gap-2 text-xs text-[#8C5E3C] font-medium mb-2.5">
                   <span>{art.date}</span>
                   <span aria-hidden="true">·</span>

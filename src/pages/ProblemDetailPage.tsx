@@ -3,7 +3,8 @@ import { commonProblems } from '../data/dogData';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
-import { CheckCircle2, AlertTriangle, ArrowRight, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, ArrowRight } from 'lucide-react';
+import { getProblemUrl } from '../utils/slugs';
 
 interface Props {
   id: string;
@@ -23,8 +24,8 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-display text-[#234231]">Behaviour Guide Not Found</h2>
         <p className="text-sm text-[#6E5D53] mt-2">The behaviour challenge you are looking for does not exist.</p>
-        <Link href="/problems" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
-          View All Behaviour Challenges
+        <Link href="/fix" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
+          View All Behaviour Fixes
         </Link>
       </div>
     );
@@ -35,10 +36,10 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <Breadcrumbs
-        backHref="/problems"
-        backLabel="All Challenges"
+        backHref="/fix"
+        backLabel="All Fixes"
         items={[
-          { label: 'Common Problems', href: '/problems' },
+          { label: 'Fixes', href: '/fix' },
           { label: item.title }
         ]}
       />
@@ -129,7 +130,7 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
           {/* Bottom actions */}
           <div className="pt-6 border-t border-[#F0EAE0] flex flex-wrap items-center justify-between gap-4">
             <Link
-              href="/training"
+              href="/t"
               className="px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] hover:bg-[#1A3326] rounded-xl transition-colors inline-flex items-center gap-2"
             >
               <span>Learn Positive Reinforcement Tools</span>
@@ -137,7 +138,7 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
             </Link>
 
             <Link
-              href="/guides"
+              href="/g"
               className="px-5 py-2.5 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE0D2] rounded-xl border border-[#DDD3C0] transition-colors"
             >
               Browse Deep-Dive Guides
@@ -156,7 +157,7 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
           {otherProblems.slice(0, 4).map((op) => (
             <Link
               key={op.id}
-              href={`/problems/${op.id}`}
+              href={getProblemUrl(op.id)}
               className="group bg-white rounded-xl border border-[#E3DAC8] overflow-hidden hover:shadow-sm transition-all p-4 block"
             >
               <h3 className="text-sm font-semibold text-[#234231] font-display group-hover:text-[#8C5E3C] transition-colors">

@@ -1,8 +1,8 @@
 import React from 'react';
 import { commonProblems, ProblemItem } from '../data/dogData';
 import { DogImage } from './DogImage';
-import { ArrowRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
+import { getProblemUrl } from '../utils/slugs';
 
 interface CommonProblemsProps {
   onSelectProblem?: (problem: ProblemItem) => void;
@@ -28,12 +28,12 @@ export const CommonProblems: React.FC<CommonProblemsProps> = ({ onSelectProblem 
         </p>
       </div>
 
-      {/* Cards Grid with unique URLs */}
+      {/* Cards Grid with short unique URLs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {commonProblems.map((prob) => (
           <Link
             key={prob.id}
-            href={`/problems/${prob.id}`}
+            href={getProblemUrl(prob.id)}
             onClick={() => onSelectProblem && onSelectProblem(prob)}
             className="group bg-white rounded-2xl border border-[#E3DAC8] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
           >

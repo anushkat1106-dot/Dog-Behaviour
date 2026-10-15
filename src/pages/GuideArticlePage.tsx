@@ -4,6 +4,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { Clock, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { getGuideUrl } from '../utils/slugs';
 
 interface Props {
   id: string;
@@ -23,7 +24,7 @@ export const GuideArticlePage: React.FC<Props> = ({ id }) => {
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-display text-[#234231]">Article Not Found</h2>
         <p className="text-sm text-[#6E5D53] mt-2">The dog behaviour article you are looking for does not exist.</p>
-        <Link href="/guides" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
+        <Link href="/g" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
           View All Guide Articles
         </Link>
       </div>
@@ -35,10 +36,10 @@ export const GuideArticlePage: React.FC<Props> = ({ id }) => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <Breadcrumbs
-        backHref="/guides"
+        backHref="/g"
         backLabel="All Articles"
         items={[
-          { label: 'Guides', href: '/guides' },
+          { label: 'Guides', href: '/g' },
           { label: item.title }
         ]}
       />
@@ -130,7 +131,7 @@ export const GuideArticlePage: React.FC<Props> = ({ id }) => {
           {otherArticles.slice(0, 3).map((oa) => (
             <Link
               key={oa.id}
-              href={`/guides/${oa.id}`}
+              href={getGuideUrl(oa.id)}
               className="group bg-white rounded-xl border border-[#E3DAC8] overflow-hidden hover:shadow-sm transition-all p-4 block"
             >
               <div className="text-[11px] text-[#8C5E3C] font-semibold mb-1">

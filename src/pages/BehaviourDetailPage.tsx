@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { coreBehaviours } from '../data/dogData';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
-import { Link, useRouter } from '../context/RouterContext';
-import { CheckCircle2, AlertTriangle, ArrowRight, BookOpen, Compass } from 'lucide-react';
+import { Link } from '../context/RouterContext';
+import { CheckCircle2, AlertTriangle, ArrowRight, Compass } from 'lucide-react';
+import { getBehaviourUrl } from '../utils/slugs';
 
 interface Props {
   id: string;
 }
 
 export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
-  const { navigate } = useRouter();
   const item = coreBehaviours.find((b) => b.id === id);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-display text-[#234231]">Behaviour Guide Not Found</h2>
         <p className="text-sm text-[#6E5D53] mt-2">The behaviour topic you are looking for does not exist.</p>
-        <Link href="/behaviour" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
+        <Link href="/b" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
           Browse All Behaviours
         </Link>
       </div>
@@ -36,10 +36,10 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <Breadcrumbs
-        backHref="/behaviour"
+        backHref="/b"
         backLabel="All Behaviours"
         items={[
-          { label: 'Dog Behaviour', href: '/behaviour' },
+          { label: 'Dog Behaviour', href: '/b' },
           { label: item.title }
         ]}
       />
@@ -149,7 +149,7 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
             </Link>
 
             <Link
-              href="/training"
+              href="/t"
               className="px-5 py-2.5 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE0D2] rounded-xl border border-[#DDD3C0] transition-colors"
             >
               Explore Positive Training Methods
@@ -168,7 +168,7 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
           {relatedBehaviours.slice(0, 4).map((rel) => (
             <Link
               key={rel.id}
-              href={`/behaviour/${rel.id}`}
+              href={getBehaviourUrl(rel.id)}
               className="group bg-white rounded-xl border border-[#E3DAC8] overflow-hidden hover:shadow-sm transition-all p-4 block"
             >
               <h3 className="text-sm font-semibold text-[#234231] font-display group-hover:text-[#8C5E3C] transition-colors">

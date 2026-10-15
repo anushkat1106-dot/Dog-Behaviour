@@ -8,6 +8,13 @@ import {
   guideArticles
 } from '../data/dogData';
 import { useRouter } from '../context/RouterContext';
+import {
+  getBehaviourUrl,
+  getProblemUrl,
+  getTrainingUrl,
+  getBreedUrl,
+  getGuideUrl
+} from '../utils/slugs';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -38,7 +45,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           title: b.title,
           category: 'Core Behaviour',
           snippet: b.shortDesc,
-          url: `/behaviour/${b.id}`
+          url: getBehaviourUrl(b.id)
         });
       }
     });
@@ -51,7 +58,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           title: p.title,
           category: 'Behaviour Problem',
           snippet: p.shortDesc,
-          url: `/problems/${p.id}`
+          url: getProblemUrl(p.id)
         });
       }
     });
@@ -64,7 +71,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           title: t.name,
           category: 'Training Technique',
           snippet: t.tagline,
-          url: `/training/${t.id}`
+          url: getTrainingUrl(t.id)
         });
       }
     });
@@ -77,7 +84,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           title: br.name,
           category: 'Dog Breed',
           snippet: `${br.group} · ${br.naturalDrives}`,
-          url: `/breeds/${br.id}`
+          url: getBreedUrl(br.id)
         });
       }
     });
@@ -90,7 +97,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           title: a.title,
           category: 'Learning Guide',
           snippet: a.excerpt,
-          url: `/guides/${a.id}`
+          url: getGuideUrl(a.id)
         });
       }
     });
@@ -140,15 +147,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         <div className="max-h-[60vh] overflow-y-auto p-4 space-y-2">
           {query.trim() === '' ? (
             <div className="py-8 text-center text-xs text-[#7A6A5E]">
-              <p className="font-semibold text-[#4E4137]">Popular searches:</p>
+              <p className="font-semibold text-[#4E4137]">Popular quick searches:</p>
               <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
                 {[
-                  { label: 'Why Dogs Bark', url: '/behaviour/why-dogs-bark' },
-                  { label: 'Separation Anxiety', url: '/problems/separation-anxiety' },
-                  { label: 'Clicker Training', url: '/training/clicker-training' },
-                  { label: 'Golden Retriever', url: '/breeds/golden-retriever' },
-                  { label: 'Playful Signals', url: '/body-language/playful' },
-                  { label: 'Leash Pulling', url: '/problems/leash-pulling' }
+                  { label: 'Why Dogs Bark', url: '/b/bark' },
+                  { label: 'Separation Anxiety', url: '/fix/anxiety' },
+                  { label: 'Clicker Training', url: '/t/clicker' },
+                  { label: 'Golden Retriever', url: '/dog/golden' },
+                  { label: 'Playful Signals', url: '/s/play' },
+                  { label: 'Leash Pulling', url: '/fix/pulling' }
                 ].map((item) => (
                   <button
                     key={item.label}

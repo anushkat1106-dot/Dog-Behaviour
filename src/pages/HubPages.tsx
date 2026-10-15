@@ -12,11 +12,20 @@ import { BehaviourQuiz } from '../components/BehaviourQuiz';
 import { AboutSection } from '../components/AboutSection';
 import { FaqSection } from '../components/FaqSection';
 import { useRouter } from '../context/RouterContext';
+import {
+  getBehaviourUrl,
+  getSignalUrl,
+  getProblemUrl,
+  getTrainingUrl,
+  getBreedUrl,
+  getAgeStageUrl,
+  getGuideUrl
+} from '../utils/slugs';
 
 export const BehaviourHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Understanding Dog Behaviour - Barking, Wagging, Jumping | CanineMind';
+    document.title = 'Dog Behaviour - Barking, Wagging, Jumping | CanineMind';
   }, []);
 
   return (
@@ -24,7 +33,7 @@ export const BehaviourHubPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Dog Behaviour' }]} />
       </div>
-      <UnderstandingBehaviour onSelectItem={(item) => navigate(`/behaviour/${item.id}`)} />
+      <UnderstandingBehaviour onSelectItem={(item) => navigate(getBehaviourUrl(item.id))} />
     </div>
   );
 };
@@ -32,15 +41,15 @@ export const BehaviourHubPage: React.FC = () => {
 export const BodyLanguageHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Dog Body Language Decoded - 7 Emotional States | CanineMind';
+    document.title = 'Dog Body Signals Decoded - 7 Emotional States | CanineMind';
   }, []);
 
   return (
     <div className="py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'Dog Body Language' }]} />
+        <Breadcrumbs items={[{ label: 'Body Language Signals' }]} />
       </div>
-      <BodyLanguageGrid onSelectState={(state) => navigate(`/body-language/${state.id}`)} />
+      <BodyLanguageGrid onSelectState={(state) => navigate(getSignalUrl(state.id))} />
     </div>
   );
 };
@@ -48,15 +57,15 @@ export const BodyLanguageHubPage: React.FC = () => {
 export const ProblemsHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Common Dog Behaviour Problems & Positive Solutions | CanineMind';
+    document.title = 'Dog Behaviour Problem Solutions | CanineMind';
   }, []);
 
   return (
     <div className="py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'Common Problems' }]} />
+        <Breadcrumbs items={[{ label: 'Common Behaviour Fixes' }]} />
       </div>
-      <CommonProblems onSelectProblem={(prob) => navigate(`/problems/${prob.id}`)} />
+      <CommonProblems onSelectProblem={(prob) => navigate(getProblemUrl(prob.id))} />
     </div>
   );
 };
@@ -64,7 +73,7 @@ export const ProblemsHubPage: React.FC = () => {
 export const TrainingHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Positive Dog Training Techniques (R+) | CanineMind';
+    document.title = 'Positive Dog Training Techniques | CanineMind';
   }, []);
 
   return (
@@ -72,7 +81,7 @@ export const TrainingHubPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Positive Training' }]} />
       </div>
-      <PositiveTraining onSelectMethod={(meth) => navigate(`/training/${meth.id}`)} />
+      <PositiveTraining onSelectMethod={(meth) => navigate(getTrainingUrl(meth.id))} />
     </div>
   );
 };
@@ -88,7 +97,7 @@ export const BreedsHubPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Dog Breeds' }]} />
       </div>
-      <BreedGuide onSelectBreed={(breed) => navigate(`/breeds/${breed.id}`)} />
+      <BreedGuide onSelectBreed={(breed) => navigate(getBreedUrl(breed.id))} />
     </div>
   );
 };
@@ -96,7 +105,7 @@ export const BreedsHubPage: React.FC = () => {
 export const AgeStagesHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Dog Behaviour by Age - Puppies to Seniors | CanineMind';
+    document.title = 'Dog Behaviour by Age - Puppy to Senior | CanineMind';
   }, []);
 
   return (
@@ -104,7 +113,7 @@ export const AgeStagesHubPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Life Stages' }]} />
       </div>
-      <AgeStages onSelectStage={(stage) => navigate(`/age-stages/${stage.id}`)} />
+      <AgeStages onSelectStage={(stage) => navigate(getAgeStageUrl(stage.id))} />
     </div>
   );
 };
@@ -112,7 +121,7 @@ export const AgeStagesHubPage: React.FC = () => {
 export const GuidesHubPage: React.FC = () => {
   const { navigate } = useRouter();
   useEffect(() => {
-    document.title = 'Dog Behaviour Guide - Educational Articles | CanineMind';
+    document.title = 'Dog Behaviour Guides & Articles | CanineMind';
   }, []);
 
   return (
@@ -120,7 +129,7 @@ export const GuidesHubPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Learning Guides' }]} />
       </div>
-      <LearningArticles onSelectArticle={(art) => navigate(`/guides/${art.id}`)} />
+      <LearningArticles onSelectArticle={(art) => navigate(getGuideUrl(art.id))} />
     </div>
   );
 };
@@ -142,7 +151,7 @@ export const DecoderHubPage: React.FC = () => {
 
 export const QuizHubPage: React.FC = () => {
   useEffect(() => {
-    document.title = 'Dog Behaviour Quiz - Test Your Canine Attunement | CanineMind';
+    document.title = 'Dog Behaviour Quiz - Test Your Attunement | CanineMind';
   }, []);
 
   return (
@@ -157,13 +166,13 @@ export const QuizHubPage: React.FC = () => {
 
 export const AboutHubPage: React.FC = () => {
   useEffect(() => {
-    document.title = 'About Dog Behaviour & Our Force-Free Mission | CanineMind';
+    document.title = 'About Dog Behaviour & Mission | CanineMind';
   }, []);
 
   return (
     <div className="py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'About' }]} />
+        <Breadcrumbs items={[{ label: 'About CanineMind' }]} />
       </div>
       <AboutSection />
     </div>
@@ -172,13 +181,13 @@ export const AboutHubPage: React.FC = () => {
 
 export const FaqHubPage: React.FC = () => {
   useEffect(() => {
-    document.title = 'Frequently Asked Canine Questions (FAQ) | CanineMind';
+    document.title = 'Frequently Asked Dog Questions | CanineMind';
   }, []);
 
   return (
     <div className="py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'FAQ' }]} />
+        <Breadcrumbs items={[{ label: 'Frequently Asked Questions' }]} />
       </div>
       <FaqSection />
     </div>

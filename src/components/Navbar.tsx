@@ -11,13 +11,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
   const { path } = useRouter();
 
   const navLinks = [
-    { label: 'Behaviour', href: '/behaviour' },
-    { label: 'Body Language', href: '/body-language' },
-    { label: 'Problems', href: '/problems' },
-    { label: 'Training', href: '/training' },
-    { label: 'Breeds', href: '/breeds' },
-    { label: 'Guides', href: '/guides' }
+    { label: 'Behaviour', href: '/b' },
+    { label: 'Body Language', href: '/s' },
+    { label: 'Problems', href: '/fix' },
+    { label: 'Training', href: '/t' },
+    { label: 'Breeds', href: '/dog' },
+    { label: 'Guides', href: '/g' }
   ];
+
+  const isNavActive = (href: string) => {
+    if (href === '/b') return path.startsWith('/b') || path.startsWith('/behaviour');
+    if (href === '/s') return path.startsWith('/s') || path.startsWith('/body-language');
+    if (href === '/fix') return path.startsWith('/fix') || path.startsWith('/problems');
+    if (href === '/t') return path.startsWith('/t') || path.startsWith('/training');
+    if (href === '/dog') return path.startsWith('/dog') || path.startsWith('/breeds');
+    if (href === '/g') return path.startsWith('/g') || path.startsWith('/guides');
+    return path.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8DFC8]">
@@ -33,13 +43,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
         {/* Zone 2: Clean 4-6 text navigation links */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#5C4F44]">
           {navLinks.map((link) => {
-            const isActive = path.startsWith(link.href);
+            const active = isNavActive(link.href);
             return (
               <Link
                 key={link.label}
                 href={link.href}
                 className={`transition-colors whitespace-nowrap ${
-                  isActive ? 'text-[#234231] font-semibold underline decoration-[#8C5E3C] decoration-2 underline-offset-4' : 'hover:text-[#234231]'
+                  active ? 'text-[#234231] font-semibold underline decoration-[#8C5E3C] decoration-2 underline-offset-4' : 'hover:text-[#234231]'
                 }`}
               >
                 {link.label}

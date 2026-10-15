@@ -4,6 +4,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { DogImage } from '../components/DogImage';
 import { Link } from '../context/RouterContext';
 import { CheckCircle2, Sparkles, ArrowRight, Award } from 'lucide-react';
+import { getTrainingUrl } from '../utils/slugs';
 
 interface Props {
   id: string;
@@ -23,7 +24,7 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-display text-[#234231]">Training Method Not Found</h2>
         <p className="text-sm text-[#6E5D53] mt-2">The training guide you are looking for does not exist.</p>
-        <Link href="/training" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
+        <Link href="/t" className="mt-6 inline-block px-5 py-2.5 text-xs font-semibold text-white bg-[#234231] rounded-xl">
           View All Training Methods
         </Link>
       </div>
@@ -35,10 +36,10 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <Breadcrumbs
-        backHref="/training"
+        backHref="/t"
         backLabel="All Training"
         items={[
-          { label: 'Positive Training', href: '/training' },
+          { label: 'Positive Training', href: '/t' },
           { label: item.name }
         ]}
       />
@@ -123,7 +124,7 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
             </Link>
 
             <Link
-              href="/guides"
+              href="/g"
               className="px-5 py-2.5 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE0D2] rounded-xl border border-[#DDD3C0] transition-colors"
             >
               Read Full Articles
@@ -141,7 +142,7 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
           {otherMethods.slice(0, 4).map((om) => (
             <Link
               key={om.id}
-              href={`/training/${om.id}`}
+              href={getTrainingUrl(om.id)}
               className="group bg-white rounded-xl border border-[#E3DAC8] overflow-hidden hover:shadow-sm transition-all p-4 block"
             >
               <h3 className="text-sm font-semibold text-[#234231] font-display group-hover:text-[#8C5E3C] transition-colors">
