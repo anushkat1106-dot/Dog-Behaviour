@@ -73,7 +73,7 @@ export const AgeStages: React.FC<AgeStagesProps> = ({ onSelectStage }) => {
               </div>
 
               <div className="mt-4 pt-3 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>View Full Stage Guide</span>
+                <span>Read complete {stage.stage.toLowerCase()} guide & Q&A</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>

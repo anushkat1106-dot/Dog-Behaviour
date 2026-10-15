@@ -118,7 +118,7 @@ export const PositiveTraining: React.FC<PositiveTrainingProps> = ({ onSelectMeth
                 href={getTrainingUrl(selectedMethod.id)}
                 className="px-4 py-2 text-xs font-semibold text-[#234231] bg-[#F4EFE6] hover:bg-[#EAE1D3] rounded-lg border border-[#DDD3C0] transition-colors inline-flex items-center gap-1.5"
               >
-                <span>View Full Training Guide</span>
+                <span>Read complete {selectedMethod.name.toLowerCase()} guide & Q&A</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#8C5E3C]" />
               </Link>
             </div>

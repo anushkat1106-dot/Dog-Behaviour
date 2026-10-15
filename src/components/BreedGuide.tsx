@@ -102,7 +102,7 @@ export const BreedGuide: React.FC<BreedGuideProps> = ({ onSelectBreed }) => {
               </div>
 
               <div className="pt-3 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>View Instincts & Enrichment</span>
+                <span>View {breed.name} instincts, temperament & Q&A</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>

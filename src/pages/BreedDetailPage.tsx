@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { Sparkles, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 import { getBreedUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const BreedDetailPage: React.FC<Props> = ({ id }) => {
   const item = breedBehaviors.find((b) => b.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.name} - Breed Behaviour & Instincts | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `${item.name} Temperament, Behaviour & Instinct Guide | CanineMind` : 'Dog Breed Profiles | CanineMind',
+    description: item ? `Explore ${item.name} temperament, instinctive drives, energy needs, and positive training tips to nurture a happy, fulfilled companion.` : 'Comprehensive behavioral profiles and ethological needs for popular dog breeds.',
+    canonicalPath: item ? getBreedUrl(item.id) : '/dog',
+    keywords: item ? [item.name.toLowerCase() + ' behaviour', item.name.toLowerCase() + ' temperament', 'dog breed guide'] : ['dog breeds']
+  });
 
   if (!item) {
     return (
@@ -158,7 +160,7 @@ export const BreedDetailPage: React.FC<Props> = ({ id }) => {
                 {ob.group} · {ob.temperament.join(', ')}
               </p>
               <span className="text-[11px] font-semibold text-[#8C5E3C] mt-3 inline-block group-hover:underline">
-                View Breed Instincts →
+                View {ob.name} behaviour & training profile →
               </span>
             </Link>
           ))}

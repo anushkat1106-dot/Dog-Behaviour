@@ -62,7 +62,7 @@ export const CommonProblems: React.FC<CommonProblemsProps> = ({ onSelectProblem 
               </div>
 
               <div className="mt-4 pt-3 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>View Full Protocol</span>
+                <span>Read positive protocol for {prob.title.toLowerCase()} & Q&A</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>

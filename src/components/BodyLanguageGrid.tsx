@@ -112,7 +112,7 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                     onClick={(e) => e.stopPropagation()}
                     className="hover:underline flex items-center gap-0.5"
                   >
-                    Dedicated Page <ArrowRight className="w-3 h-3" />
+                    Read full {state.emotion.toLowerCase()} signal guide & Q&A <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export const BodyLanguageGrid: React.FC<BodyLanguageGridProps> = ({ onSelectStat
                   href={getSignalUrl(selectedState.id)}
                   className="px-3.5 py-1.5 text-xs font-semibold text-[#234231] bg-white hover:bg-[#FAF7F2] border border-[#DDD3C0] rounded-lg transition-colors flex items-center gap-1"
                 >
-                  <span>View Full Signal Profile</span>
+                  <span>View complete {selectedState.emotion.toLowerCase()} signal profile & Q&A</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

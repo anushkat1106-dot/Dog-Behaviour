@@ -66,7 +66,7 @@ export const UnderstandingBehaviour: React.FC<UnderstandingBehaviourProps> = ({ 
               </div>
 
               <div className="mt-5 pt-4 border-t border-[#F0EAE0] flex items-center justify-between text-xs font-semibold text-[#8C5E3C]">
-                <span>View Full Ethology Guide</span>
+                <span>Read complete {item.title.toLowerCase()} guide & Q&A</span>
                 <span className="group-hover:translate-x-0.5 transition-transform">→</span>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { CheckCircle2, Sparkles, ArrowRight, Award } from 'lucide-react';
 import { getTrainingUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
   const item = trainingMethods.find((t) => t.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.name} - Dog Training Technique | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `${item.name} Guide: Positive Dog Training Techniques | CanineMind` : 'Positive Dog Training | CanineMind',
+    description: item ? `Master ${item.name.toLowerCase()} with reward-based step-by-step instructions. Understand core science principles, benefits, and pro tips.` : 'Science-based positive reinforcement dog training methods and protocols.',
+    canonicalPath: item ? getTrainingUrl(item.id) : '/t',
+    keywords: item ? [item.name.toLowerCase(), 'dog training', 'positive reinforcement', 'canine obedience'] : ['dog training']
+  });
 
   if (!item) {
     return (
@@ -156,7 +158,7 @@ export const TrainingDetailPage: React.FC<Props> = ({ id }) => {
                 {om.tagline}
               </p>
               <span className="text-[11px] font-semibold text-[#8C5E3C] mt-3 inline-block group-hover:underline">
-                View Technique →
+                Learn {om.name.toLowerCase()} step-by-step →
               </span>
             </Link>
           ))}

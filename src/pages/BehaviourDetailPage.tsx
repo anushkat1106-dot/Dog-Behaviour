@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { CheckCircle2, AlertTriangle, ArrowRight, Compass } from 'lucide-react';
 import { getBehaviourUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
   const item = coreBehaviours.find((b) => b.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.title} - Canine Ethology Guide | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `${item.title} - Canine Ethology & Behaviour Guide | CanineMind` : 'Dog Behaviour Guide | CanineMind',
+    description: item ? `Learn why dogs perform ${item.title.toLowerCase()}, decode underlying evolutionary causes, and discover positive reinforcement solutions.` : 'Explore comprehensive canine ethology and behavior guides.',
+    canonicalPath: item ? getBehaviourUrl(item.id) : '/b',
+    keywords: item ? [item.title.toLowerCase(), 'dog behaviour', 'canine ethology', 'dog psychology'] : ['dog behaviour']
+  });
 
   if (!item) {
     return (
@@ -182,7 +184,7 @@ export const BehaviourDetailPage: React.FC<Props> = ({ id }) => {
                 {rel.shortDesc}
               </p>
               <span className="text-[11px] font-semibold text-[#8C5E3C] mt-3 inline-block group-hover:underline">
-                Read Guide →
+                Read full {rel.title.toLowerCase()} guide & Q&A →
               </span>
             </Link>
           ))}

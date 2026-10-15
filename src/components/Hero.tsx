@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
                 className="px-6 py-3.5 text-sm font-semibold text-white bg-[#234231] hover:bg-[#1A3326] rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer flex items-center gap-2"
               >
                 <Compass className="w-4 h-4 text-[#E07A5F]" />
-                <span>Explore Dog Behaviour</span>
+                <span>Explore Dog Behaviour Guides & Ethology</span>
               </Link>
 
               <Link
@@ -44,7 +44,7 @@ export const Hero: React.FC = () => {
                 className="px-6 py-3.5 text-sm font-semibold text-[#234231] bg-white hover:bg-[#F4EFE6] border border-[#DDD3C0] rounded-xl transition-all shadow-2xs hover:shadow-sm cursor-pointer flex items-center gap-2"
               >
                 <BookOpen className="w-4 h-4 text-[#8C5E3C]" />
-                <span>Learn Training Tips</span>
+                <span>Learn Positive Dog Training Methods</span>
               </Link>
             </div>
 

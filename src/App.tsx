@@ -53,6 +53,47 @@ import {
   resolveGuideId
 } from './utils/slugs';
 
+import { usePageSEO } from './utils/usePageSEO';
+
+function HomePage() {
+  usePageSEO({
+    title: 'CanineMind - Dog Behaviour, Body Language & Positive Training Guide',
+    description: 'Learn why dogs bark, decode subtle calming signals and tail wags, solve common behavioral challenges with positive reinforcement, and read in-depth articles.',
+    canonicalPath: '/',
+    keywords: ['dog behaviour guide', 'dog body language chart', 'why dogs bark', 'positive dog training', 'dog separation anxiety fix'],
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'CanineMind',
+      url: typeof window !== 'undefined' ? window.location.origin : 'https://caninemind.app',
+      description: 'An educational guide helping dog owners decode canine body language, emotions, common behavioural challenges, and positive reward-based training.',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://caninemind.app/search?q={search_term_string}',
+        'query-input': 'required name=search_term_string'
+      }
+    }
+  });
+
+  return (
+    <>
+      <Hero />
+      <BehaviourOfTheDay />
+      <DogDecoder />
+      <UnderstandingBehaviour />
+      <BodyLanguageGrid />
+      <CommonProblems />
+      <PositiveTraining />
+      <AgeStages />
+      <BreedGuide />
+      <BehaviourQuiz />
+      <LearningArticles />
+      <AboutSection />
+      <FaqSection />
+    </>
+  );
+}
+
 function AppContent() {
   const { path } = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -72,34 +113,11 @@ function AppContent() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Update default document title when at home
-  useEffect(() => {
-    if (path === '/') {
-      document.title = 'CanineMind - Dog Behaviour & Training Guide';
-    }
-  }, [path]);
-
   // Route Renderer with Short Unique URLs
   const renderRoute = () => {
     // 1. Home
     if (path === '/' || path === '') {
-      return (
-        <>
-          <Hero />
-          <BehaviourOfTheDay />
-          <DogDecoder />
-          <UnderstandingBehaviour />
-          <BodyLanguageGrid />
-          <CommonProblems />
-          <PositiveTraining />
-          <AgeStages />
-          <BreedGuide />
-          <BehaviourQuiz />
-          <LearningArticles />
-          <AboutSection />
-          <FaqSection />
-        </>
-      );
+      return <HomePage />;
     }
 
     // 2. Behaviours: short `/b/:slug` or legacy `/behaviour/:id`

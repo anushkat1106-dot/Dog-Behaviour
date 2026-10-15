@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { getSignalUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
   const item = bodyLanguageStates.find((s) => s.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.emotion} - Dog Body Language Signals | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `${item.emotion} Dog Body Language: Ears, Tail & Posture Cues | CanineMind` : 'Canine Body Language Signals | CanineMind',
+    description: item ? `Decode when a dog feels ${item.emotion.toLowerCase()}. Learn how to read ear posture, tail movement, eye tension, and mouth shape accurately.` : 'Detailed visual guide to reading canine emotional body language signals.',
+    canonicalPath: item ? getSignalUrl(item.id) : '/s',
+    keywords: item ? [item.emotion.toLowerCase() + ' dog', 'dog body language', 'canine signals', 'reading dog ears tail'] : ['dog body language']
+  });
 
   if (!item) {
     return (
@@ -144,7 +146,7 @@ export const BodyLanguageDetailPage: React.FC<Props> = ({ id }) => {
               <h3 className="text-xs font-semibold text-[#234231] group-hover:text-[#8C5E3C] transition-colors">
                 {st.emotion}
               </h3>
-              <span className="text-[10px] text-[#8C5E3C] mt-1 block">Inspect State →</span>
+              <span className="text-[10px] font-semibold text-[#8C5E3C] mt-1 block">Read {st.emotion.toLowerCase()} cues →</span>
             </Link>
           ))}
         </div>

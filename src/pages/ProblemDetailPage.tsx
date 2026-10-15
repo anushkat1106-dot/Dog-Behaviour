@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import { getProblemUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
   const item = commonProblems.find((p) => p.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.title} - Positive Solutions & Guide | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `How to Fix ${item.title} in Dogs: Positive Training | CanineMind` : 'Dog Behaviour Fixes | CanineMind',
+    description: item ? `Discover science-backed, positive solutions to resolve ${item.title.toLowerCase()} in dogs, avoid common punishment mistakes, and restore calm.` : 'Step-by-step positive guides to solving common canine behavior challenges.',
+    canonicalPath: item ? getProblemUrl(item.id) : '/fix',
+    keywords: item ? [item.title.toLowerCase(), 'how to fix dog behaviour', 'positive dog training', 'dog problems'] : ['dog training solutions']
+  });
 
   if (!item) {
     return (
@@ -171,7 +173,7 @@ export const ProblemDetailPage: React.FC<Props> = ({ id }) => {
                 {op.shortDesc}
               </p>
               <span className="text-[11px] font-semibold text-[#8C5E3C] mt-3 inline-block group-hover:underline">
-                View Solutions →
+                Read positive solutions for {op.title.toLowerCase()} →
               </span>
             </Link>
           ))}

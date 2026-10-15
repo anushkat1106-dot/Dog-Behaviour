@@ -6,6 +6,7 @@ import { Link } from '../context/RouterContext';
 import { Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { getAgeStageUrl } from '../utils/slugs';
 import { ArticleQnA } from '../components/ArticleQnA';
+import { usePageSEO } from '../utils/usePageSEO';
 
 interface Props {
   id: string;
@@ -14,11 +15,12 @@ interface Props {
 export const AgeStageDetailPage: React.FC<Props> = ({ id }) => {
   const item = ageStages.find((a) => a.id === id);
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.stage} (${item.ageRange}) - Behaviour & Needs | CanineMind`;
-    }
-  }, [item]);
+  usePageSEO({
+    title: item ? `${item.stage} (${item.ageRange}) Behaviour & Care Guide | CanineMind` : 'Canine Life Stages | CanineMind',
+    description: item ? `Learn what to expect during the ${item.stage.toLowerCase()} phase (${item.ageRange}): developmental focus, common behavioral changes, and guidance.` : 'Developmental stages, behavioral changes, and training milestones for dogs from puppy to senior.',
+    canonicalPath: item ? getAgeStageUrl(item.id) : '/age',
+    keywords: item ? [item.stage.toLowerCase() + ' dog behaviour', 'canine development', 'dog age stages'] : ['dog development stages']
+  });
 
   if (!item) {
     return (
@@ -158,7 +160,7 @@ export const AgeStageDetailPage: React.FC<Props> = ({ id }) => {
                 {os.developmentalFocus}
               </p>
               <span className="text-[11px] font-semibold text-[#8C5E3C] mt-3 inline-block group-hover:underline">
-                Read Stage Details →
+                Explore {os.stage.toLowerCase()} behavioral stage & Q&A →
               </span>
             </Link>
           ))}
